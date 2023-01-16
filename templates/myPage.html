@@ -2,9 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+
+    <title>무료 청첩장</title>
+
+    <style>
+          * {
+              font-size: 1.2rem;
+              font-family: 'Noto Sans KR', sans-serif;
+          }
+
+          a {
+              text-decoration: none;
+              color: black;
+          }
+
+          .mypage-area {
+              /* viewport 기준으로 높이 100% */
+              height: 100vh;
+              /* 정가운데 */
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+
+              width: 70%;
+              margin: 0 auto;
+          }
+
+          .mypage-top {
+              width: 100%;
+              height: 10%;
+
+              display: inline-block;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+
+              border-bottom: 2px solid lightgrey;
+          }
+          .mypage-top > div {
+              text-align: right;
+
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              height: 100%;
+          }
+
+          .mypage-bottom {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+
+              width: 100%;
+              height: 90%;
+
+          }
+          .mypage-none {
+              background-color: lightgoldenrodyellow;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+
+              width: 100%;
+              border-radius: 10px;
+          }
+          .mypage-none > span {
+              margin-top: 20px;
+              margin-bottom: 20px;
+          }
+
+
+    </style>
+
+    <script>
+        // 청첩장 정보가 있는지 확인
+        // 아이디 값으로 db에 청첩장 작성되어있는지 확인해오기
+        // 아직 작성 중
+        /*
+        function mapage_id() {
+            let url = $('#url').val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/movie',
+                data: {url_give:url},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+        */
+
+        function wedding_write() {
+            // 이렇게 작성하면 페이지 이동 됨^^
+            // 확인용
+            // document.location.href='weddingWrite.html';
+        }
+        function wedding_edit() {
+            // 클릭시 청첩장 뷰페이지 넘어간다
+        }
+
+    </script>
 </head>
 <body>
 
+    <div class="mypage-area">
+        <div class="mypage-top">
+            <div><a href="index.html">logout</a></div>
+        </div>
+        <div class="mypage-bottom">
+            <div class="mypage-none">
+                <span>작성된 청첩장이 없습니다.</span>
+                <span><button type="button" class="btn btn-success" onclick="wedding_write()">→&nbsp;&nbsp;작성하기</button></span>
+            </div>
+            <div class="mypage-none">
+                <span>작성된 청첩장이 있습니다.</span>
+                <span><button type="button" class="btn btn-success" onclick="wedding_edit()">→&nbsp;&nbsp;보러가기</button></span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
