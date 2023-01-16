@@ -31,8 +31,8 @@ def edit():
 
 @app.route("/edit/cancel", methods=["POST"])
 def weddingCancel():
-    num_receive = request.form['num_give']
-    db.wedding.delete_one({'num':num_receive})
+    num_receive = request.form['num_gives']
+    db.wedding.delete_one({'num': int(num_receive)})
     return jsonify({'msg':'취소 완료!'})
 @app.route('/modify')
 def modify():
@@ -41,6 +41,11 @@ def modify():
 @app.route('/write', methods=["GET"])
 def write():
     return render_template('weddingWrite.html')
+
+@app.route('/write/check', methods=["GET"])
+def signUpGet():
+    weddinglist = list(db.wedding.find({}, {'_id': False}))
+    return jsonify({'wedding': weddinglist})
 
 @app.route('/write_invitation', methods=["POST"])
 def write_invitation():

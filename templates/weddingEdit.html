@@ -6,7 +6,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script crossorigin="anonymous"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -95,112 +94,92 @@
 
     </style>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             show_comment()
 
         });
 
         function show_comment() {
-                    $.ajax({
-                        type: "GET",
-                        url: "/write/give",
-                        data: {},
-                        success: function (response) {
-                            let rows = response['wedding']
-                            for (let i = 0; i < rows.length; i++) {
-                                let name = rows[i]['name']
-                                let manName = rows[i]['manName']
-                                let girlName = rows[i]['girlName']
-                                let weddingDay = rows[i]['weddingDay']
-                                let weddingPlace = rows[i]['weddingPlace']
-                                let comment = rows[i]['comment']
-                                let manMom = rows[i]['manMom']
-                                let manDad = rows[i]['manDad']
-                                let girlMom = rows[i]['girlMom']
-                                let girlDad = rows[i]['girlDad']
-                                let manAccount = rows[i]['manAccount']
-                                let girlAccount = rows[i]['girlAccount']
-                                let num = row[i]['num']
-                                temp_html= `
-                                            <div class = "wedding1">
-                                                ${manName} & ${girlName}
-                                                ${weddingDay}
-                                            </div>
-                                            <div class = "wedding2">
-                                                ${comment}
-                                            </div>
-                                            <div class = "wedding3">
-                                                ${manName} 엄마${manMom} & 아빠${manDad}
-                                                & ${girlName} 엄마${girlMom} & 아빠${girlDad}
-                                            </div>
-                                            <div class = "wedding4">
-                                                ${weddingPlace}
-                                            </div>
-                                            <div class = "wedding5">
-                                            </div>
-                                            <div>
-                                            </div>
-                                            <div>
-                                            </div>
-                                            <div class = "wedding5">
-                                                ${girlAccount}
-                                                ${manAccount}
-                                            </div>
-                            $('#comment-box').append(temp_html)
+            $.ajax({
+            type: "GET",
+            url: "/write/check",
+            data: {},
+            success: function (response) {
+            let rows = response['wedding']
+            for (let i = 0; i < rows.length; i++) {
+                                            let name = rows[i]['name']
+                                            let manName = rows[i]['manName']
+                                            let girlName = rows[i]['girlName']
+                                            let weddingDay = rows[i]['weddingDay']
+                                            let weddingPlace = rows[i]['weddingPlace']
+                                            let comment = rows[i]['comment']
+                                            let manMom = rows[i]['manMom']
+                                            let manDad = rows[i]['manDad']
+                                            let girlMom = rows[i]['girlMom']
+                                            let girlDad = rows[i]['girlDad']
+                                            let manAccount = rows[i]['manAccount']
+                                            let girlAccount = rows[i]['girlAccount']
+                                            let num = rows[i]['num']
 
+                                            let temp_html =`
+                                                        <div class = "wedding1">
+                                                            ${manName}  ${girlName}
+                                                            ${weddingDay}
+                                                        </div>
+                                                        <div class = "wedding2">
+                                                            ${comment}
+                                                        </div>
+                                                        <div class = "wedding3">
+                                                            ${manName} 엄마${manMom}  아빠${manDad}
+                                                            & ${girlName} 엄마${girlMom}  아빠${girlDad}
+                                                        </div>
+                                                        <div class = "wedding4">
+                                                            ${weddingPlace}
+                                                        </div>
+                                                        <div class = "wedding5">
+                                                        </div>
+                                                        <div>
+                                                        </div>
+                                                        <div>
+                                                        </div>
+                                                        <div class = "wedding5">
+                                                            ${girlAccount}
+                                                            ${manAccount}
+                                                        </div>
+                                                            <button class="pypy" id="WeddingModify" onclick="modify">수정하기</button>
+                                                            <button class="pypy1" id="WeddingDelete" onclick="deletes(${num})">삭제하기</button>
+                                                        `
+            $('#comment-box').append(temp_html)
+
+                                        }
+                                    }
+                                });
                             }
-                        }
-                    });
-                }
-        function modify(){
 
-        }
-        function delete(num) {
+        function deletes(num){
+
             $.ajax({
             type: "POST",
             url: "/edit/cancel",
-            data: {num_give:num},
+            data: {'num_gives':num},
             success: function (response) {
                 alert(response["msg"])
                 window.location.reload()
                 }
             });
         }
-        }
-</script>
+
+
+
+
+    </script>
+
 </head>
 <body>
 <div class="mypic">
 </div>
 <div class="mycards" id="comment-box">
-    <div/>
-    <div class = "wedding1">
-        ${manName} & ${girlName}
-        ${weddingDay}
-    </div>
-    <div class = "wedding2">
-        ${comment}
-    </div>
-    <div class = "wedding3">
-        ${manName} 엄마${manMom} & 아빠${manDad}
-        & ${girlName} 엄마${girlMom} & 아빠${girlDad}
-    </div>
-    <div class = "wedding4">
-        ${weddingPlace}
-    </div>
-    <div>
-    </div>
-    <div>
-    </div>
-    <div>
-    </div>
-    <div class = "wedding5">
-        ${girlAccount}
-        ${manAccount}
-    </div>
-
-    <button class="pypy" id="WeddingModify" onclick="modify">수정하기</button>
-    <button class="pypy1" id="WeddingDelete" onclick="delete">삭제하기</button>
+</div>
 
 </body>
 </html>
