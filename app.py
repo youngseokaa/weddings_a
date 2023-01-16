@@ -25,11 +25,11 @@ def signIn():
     return render_template('signUp.html')
 
 
-@app.route('/Edit')
+@app.route('/edit')
 def edit():
     return render_template('weddingEdit.html')
 
-@app.route('/Modify')
+@app.route('/modify')
 def modify():
     return render_template('weddingModify.html')
 
