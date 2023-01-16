@@ -93,6 +93,7 @@ def api_login():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
+<<<<<<< HEAD
 @app.route('/api/nick', methods=['GET'])
 def api_valid():
     token_receive = request.cookies.get('mytoken')
@@ -106,6 +107,65 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+=======
+@app.route('/edit')
+def edit():
+    return render_template('weddingEdit.html')
+
+@app.route("/edit/cancel", methods=["POST"])
+def weddingCancel():
+    num_receive = request.form['num_gives']
+    db.wedding.delete_one({'num': int(num_receive)})
+    return jsonify({'msg':'취소 완료!'})
+@app.route('/modify')
+def modify():
+    return render_template('weddingModify.html')
+
+@app.route('/write', methods=["GET"])
+def write():
+    return render_template('weddingWrite.html')
+
+@app.route('/write/check', methods=["GET"])
+def signUpGet():
+    weddinglist = list(db.wedding.find({}, {'_id': False}))
+    return jsonify({'wedding': weddinglist})
+
+@app.route('/write_invitation', methods=["POST"])
+def write_invitation():
+    wedding_list = list(db.wedding.find({}, {'_id': False}))
+    num = len(wedding_list) + 1
+
+    manName_receive = request.form['manName_give']
+    girlName_receive = request.form['girlName_give']
+    weddingDay_receive = request.form['weddingDay_give']
+    weddingPlace_receive = request.form['weddingPlace_give']
+    comment_receive = request.form['comment_give']
+    manMom_receive = request.form['manMom_give']
+    manDad_receive = request.form['manDad_give']
+    girlMom_receive = request.form['girlMom_give']
+    girlDad_receive = request.form['girlDad_give']
+    manAccount_receive = request.form['manAccount_give']
+    girlAccount_receive = request.form['girlAccount_give']
+
+    doc = {
+        'manName': manName_receive,
+        'girlName': girlName_receive,
+        'weddingDay': weddingDay_receive,
+        'weddingPlace': weddingPlace_receive,
+        'comment': comment_receive,
+        'manMom': manMom_receive,
+        'manDad': manDad_receive,
+        'girlMom': girlMom_receive,
+        'girlDad': girlDad_receive,
+        'manAccount': manAccount_receive,
+        'girlAccount': girlAccount_receive,
+        'num':num
+    }
+    db.wedding.insert_one(doc)
+
+    return jsonify({'msg': '작성 완료!'})
+
+>>>>>>> origin/wedding_num
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
