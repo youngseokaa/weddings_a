@@ -12,7 +12,7 @@
             crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 
-    <title>Title</title>
+    <title>무료 청첩장</title>
 
     <style>
           * {
@@ -107,6 +107,15 @@
         }
         */
 
+        function wedding_write() {
+            // 이렇게 작성하면 페이지 이동 됨^^
+            // 확인용
+            // document.location.href='weddingWrite.html';
+        }
+        function wedding_edit() {
+            // 클릭시 청첩장 뷰페이지 넘어간다
+        }
+
     </script>
 </head>
 <body>
@@ -118,11 +127,11 @@
         <div class="mypage-bottom">
             <div class="mypage-none">
                 <span>작성된 청첩장이 없습니다.</span>
-                <span><button type="button" class="btn btn-success">→&nbsp;&nbsp;작성하기</button></span>
+                <span><button type="button" class="btn btn-success" onclick="wedding_write()">→&nbsp;&nbsp;작성하기</button></span>
             </div>
             <div class="mypage-none">
                 <span>작성된 청첩장이 있습니다.</span>
-                <span><button type="button" class="btn btn-success">→&nbsp;&nbsp;보러가기</button></span>
+                <span><button type="button" class="btn btn-success" onclick="wedding_edit()">→&nbsp;&nbsp;보러가기</button></span>
             </div>
         </div>
     </div>
